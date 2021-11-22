@@ -121,7 +121,7 @@ MonoBehaviour:
   _speed: 0.4
   _damage: 3
   _health: 3
-  _particle: {fileID: 2992454061812416291}
+  _explosion: {fileID: 2992454061812416291}
 --- !u!70 &8520807353895284094
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

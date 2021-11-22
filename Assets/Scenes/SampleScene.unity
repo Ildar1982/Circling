@@ -158,9 +158,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 3
+  _dronControlButton: {fileID: 1481571448}
   Particle: {fileID: 38240421}
   SpriteRenderer: {fileID: 38240424}
-  FieldDefender: 1
 --- !u!4 &38240419
 Transform:
   m_ObjectHideFlags: 0
@@ -5742,6 +5742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 803166581}
+  _chargingDrone: {fileID: 1041824184}
   _drone: {fileID: 1041824183}
 --- !u!1 &885986387
 GameObject:
@@ -5818,7 +5819,7 @@ MonoBehaviour:
   - {fileID: 1350526396}
   - {fileID: 434826290}
   _target: {fileID: 1804634306}
-  _shore: {fileID: 1629612523}
+  _score: {fileID: 1629612523}
 --- !u!4 &906249326
 Transform:
   m_ObjectHideFlags: 0
@@ -6212,6 +6213,7 @@ GameObject:
   - component: {fileID: 1041824179}
   - component: {fileID: 1041824182}
   - component: {fileID: 1041824183}
+  - component: {fileID: 1041824184}
   m_Layer: 0
   m_Name: Dron
   m_TagString: Untagged
@@ -6335,14 +6337,26 @@ MonoBehaviour:
   _parametrAEllipse: 1.5
   _parametrBEllipse: 2
   _angleAlfaEllipseStartingPosition: 1
-  _angleAlfaEllipseStartingPositionOld: 1
-  _speedAngleEllipse: 0.02
   _energy: 1
   _changeEnergy: 0.1
-  _changeEnergyCharge: 0.01
-  _currentspeedDron: 2
-  _field: {fileID: 38240418}
-  FeildDefender: 1
+  _currentspeedDron: 0.05
+  _dronControlButton: {fileID: 1481571448}
+  _chargingDron: {fileID: 1041824184}
+--- !u!114 &1041824184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041824178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62851375ca658145a8cdf799e8e1306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dronControlButton: {fileID: 1481571448}
+  _changeEnergyCharge: 0.05
+  _moveDron: {fileID: 1041824183}
 --- !u!1 &1174264821
 GameObject:
   m_ObjectHideFlags: 0
@@ -11497,6 +11511,7 @@ GameObject:
   - component: {fileID: 1481571445}
   - component: {fileID: 1481571444}
   - component: {fileID: 1481571447}
+  - component: {fileID: 1481571448}
   m_Layer: 5
   m_Name: Energy_button
   m_TagString: Untagged
@@ -11623,8 +11638,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1041824183}
-          m_TargetAssemblyTypeName: Dron, Assembly-CSharp
+        - m_Target: {fileID: 1481571448}
+          m_TargetAssemblyTypeName: DronControlButton, Assembly-CSharp
           m_MethodName: ButtonChargingDron
           m_Mode: 1
           m_Arguments:
@@ -11635,7 +11650,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1739247784}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: ChargingBeam, Assembly-CSharp
           m_MethodName: ButtonChargingBeam
           m_Mode: 1
@@ -11651,8 +11666,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1041824183}
-          m_TargetAssemblyTypeName: Dron, Assembly-CSharp
+        - m_Target: {fileID: 1481571448}
+          m_TargetAssemblyTypeName: DronControlButton, Assembly-CSharp
           m_MethodName: ButtonChargingDronStop
           m_Mode: 1
           m_Arguments:
@@ -11663,7 +11678,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1739247784}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: ChargingBeam, Assembly-CSharp
           m_MethodName: ButtonChargingBeamStop
           m_Mode: 1
@@ -11675,6 +11690,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1481571448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481571442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ce246238fba084e9b463ef53268c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1531424970
 GameObject:
   m_ObjectHideFlags: 0
@@ -12039,6 +12066,49 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &1662180518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1662180520}
+  - component: {fileID: 1662180519}
+  m_Layer: 0
+  m_Name: TypedProcessor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1662180519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662180518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75bc3aeafff29d4294a27937966d3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1662180520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662180518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1696271301
 GameObject:
   m_ObjectHideFlags: 0
@@ -16856,51 +16926,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!1 &1739247783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1739247785}
-  - component: {fileID: 1739247784}
-  m_Layer: 0
-  m_Name: Charging Beam
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1739247784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739247783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c7cf3e47cf0cd6458ad0640783a23c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 1041824183}
-  _particle: {fileID: 0}
---- !u!4 &1739247785
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739247783}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1804634302
 GameObject:
   m_ObjectHideFlags: 0
