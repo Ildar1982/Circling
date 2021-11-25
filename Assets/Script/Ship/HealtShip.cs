@@ -12,10 +12,12 @@ public class HealtShip : MonoBehaviour
     {
         _ship.ChangeHealt += ChangeHealt;
     }
+
     private void OnDisable()
     {
         _ship.ChangeHealt -= ChangeHealt;
     }
+
     private void ChangeHealt()
     {
         _image.fillAmount = _image.fillAmount - _degreeReductionLifeShip;

@@ -19,29 +19,32 @@ public class ChargingDron : MonoBehaviour
         _dronControlButton.ChargingDron += Charging;
         _dronControlButton.UnChargingDron += StopCharging;
     }
+
     private void OnDisable()
     {
         _dronControlButton.ChargingDron -= Charging;
         _dronControlButton.UnChargingDron -= StopCharging;
     }
+
     private void Charging()
     {
         StartCoroutine(Energy());
-
     }
+
     private void StopCharging()
     {
         StopAllCoroutines();
         _moveDron.DronEnergyCharging(_energy);
     }
+
     public void DronEnergyInit(float energy, float energyMax)
     {
         _energy = energy;
         _energyMax = energyMax;
     }
+
     private IEnumerator Energy()
     {
-
         while (true)
         {
             yield return waitSecondsEnergy;

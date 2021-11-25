@@ -17,16 +17,19 @@ public class Menu : MonoBehaviour
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvasGroup.alpha = 0;
     }
+
     private void OnEnable()
     {
         _ship.Died += DiedOrButtonExit;
         _ship.Died += RegisterShipDied;
     }
+
     private void OnDisable()
     {
         _ship.Died -= DiedOrButtonExit;
         _ship.Died -= RegisterShipDied;
     }
+
     private void DiedOrButtonExit()
     {
         _canvasGroup.alpha = 1;
@@ -34,10 +37,12 @@ public class Menu : MonoBehaviour
         _dron.gameObject.SetActive(false);
         _energy_button.gameObject.SetActive(false);
     }
+
     private void RegisterShipDied()
     {
         _shipDied = true;
     }
+
     public void CloseButton()
     {
         if (_shipDied == false)
@@ -48,10 +53,12 @@ public class Menu : MonoBehaviour
             _energy_button.gameObject.SetActive(true);
         }
     }
+
     public void ExitButton()
     {
         Application.Quit();
     }
+
     public void RestartButton()
     {
         Time.timeScale = 1;

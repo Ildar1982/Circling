@@ -25,6 +25,7 @@ public class Ship : MonoBehaviour
             StartCoroutine(Explosion());
         }
     }
+
     private IEnumerator Explosion()
     {
         yield return waitSecondsExplosion;

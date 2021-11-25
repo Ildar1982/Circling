@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Monstr _monstr;
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private Ship _target;
-    [SerializeField] private AccrualOfPoints _score;
+    [SerializeField] private AccrualAndWithdrawalPoints _score;
 
     private WaitForSeconds waitForTwoSeconds = new WaitForSeconds(1.5f);
     private int numberPoints;
@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour
     {
         StartCoroutine(Spawn());
     }
+
     private IEnumerator Spawn()
     {
         while (true)

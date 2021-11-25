@@ -12,15 +12,18 @@ public class RemainingEnergy : MonoBehaviour
         _chargingDrone.ChangeEnergyUp += ChangeEnergyUp;
         _drone.ChangeEnergyDown += ChangeEnergyDown;
     }
+
     private void OnDisable()
     {
         _chargingDrone.ChangeEnergyUp -= ChangeEnergyUp;
         _drone.ChangeEnergyDown -= ChangeEnergyDown;
     }
+
     private void ChangeEnergyUp()
     {
         _image.fillAmount = _image.fillAmount + 0.05f;
     }
+
     private void ChangeEnergyDown()
     {
         _image.fillAmount = _image.fillAmount - 0.1f;

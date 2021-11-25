@@ -11,9 +11,9 @@ public class MoveDron : MonoBehaviour
     [SerializeField] private float _currentspeedDron;
     [SerializeField] private DronControlButton _dronControlButton;
     [SerializeField] private ChargingDron _chargingDron;
+    [SerializeField] private Transform _oldTransform;
+    [SerializeField] private Transform _currentTransform;
 
-    private Transform _oldTransform;
-    private Transform _currentTransform;
     private float _currentEllipseX;
     private float _currentEllipseY;
     private bool _energyDown = false;
@@ -25,21 +25,22 @@ public class MoveDron : MonoBehaviour
     public event UnityAction ChangeEnergyDown;
 
     private void Start()
-    {
-        _oldTransform = GetComponent<Transform>();
-        _currentTransform = GetComponent<Transform>();
+    {        
         _energyMax = _energy;
     }
+
     private void OnEnable()
     {
         _dronControlButton.ChargingDron += DronStop;
         _dronControlButton.UnChargingDron += DronMove;
     }
+
     private void OnDisable()
     {
         _dronControlButton.ChargingDron -= DronStop;
         _dronControlButton.UnChargingDron -= DronMove;
     }
+
     private void Update()
     {
         RotateInAnEllipse();
@@ -56,17 +57,19 @@ public class MoveDron : MonoBehaviour
             _energyDown = false;
         }
     }
+
     private void DronStop()
     {
         _speedDron = _currentspeedDron;
         _currentspeedDron = 0;
         _chargingDron.DronEnergyInit(_energy, _energyMax);
-
     }
+
     private void DronMove()
     {
         _currentspeedDron = _speedDron;
     }
+
     private void RotateInAnEllipse()
     {
         _angleAlfaEllipseStartingPosition = _angleAlfaEllipseStartingPosition + (_energy * _currentspeedDron);
@@ -76,11 +79,9 @@ public class MoveDron : MonoBehaviour
         _currentTransform.transform.position = new Vector2(_currentEllipseX, _currentEllipseY);
         transform.position = Vector2.MoveTowards(_currentTransform.transform.position, _oldTransform.transform.position, Time.deltaTime);
     }
+
     public void DronEnergyCharging(float chargingEnergy)
     {
         _energy = chargingEnergy;
     }
-
-
-
 }
