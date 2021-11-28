@@ -3,16 +3,16 @@ using UnityEngine.Events;
 
 public class DronControlButton : MonoBehaviour
 {
-    public event UnityAction ChargingDron;
-    public event UnityAction UnChargingDron;
+    public event UnityAction ChargingStarted;
+    public event UnityAction ChargingStopped;
 
-    public void ButtonChargingDron()
+    public void TurnCharging()
     {
-        ChargingDron?.Invoke();
+        ChargingStarted?.Invoke();
     }
 
-    public void ButtonChargingDronStop()
+    public void DisableCharging()
     {
-        UnChargingDron?.Invoke();
+        ChargingStopped?.Invoke();
     }
 }

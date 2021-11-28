@@ -2,22 +2,19 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-
 public class Ship : MonoBehaviour
 {
     [SerializeField] private int _health;
     [SerializeField] private ParticleSystem _hit;
-    [SerializeField] private ParticleSystem _explosion;
+    [SerializeField] private ParticleSystem _explosion;   
 
-    private WaitForSeconds waitSecondsExplosion = new WaitForSeconds(2f);
-
-    public event UnityAction ChangeHealt;
+    public event UnityAction HealthHasChanged;
     public event UnityAction Died;
 
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        ChangeHealt?.Invoke();
+        HealthHasChanged?.Invoke();
         _hit.Play();
         if (_health < 0)
         {
@@ -28,6 +25,8 @@ public class Ship : MonoBehaviour
 
     private IEnumerator Explosion()
     {
+        WaitForSeconds waitSecondsExplosion = new WaitForSeconds(2f);
+
         yield return waitSecondsExplosion;
         Died?.Invoke();
     }

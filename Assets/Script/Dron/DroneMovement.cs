@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class MoveDron : MonoBehaviour
+public class DroneMovement : MonoBehaviour
 {
     [SerializeField] private float _parametrAEllipse;
     [SerializeField] private float _parametrBEllipse;
@@ -10,7 +10,7 @@ public class MoveDron : MonoBehaviour
     [SerializeField] private float _changeEnergy;
     [SerializeField] private float _currentspeedDron;
     [SerializeField] private DronControlButton _dronControlButton;
-    [SerializeField] private ChargingDron _chargingDron;
+    [SerializeField] private DronePowerSupply _chargingDron;
     [SerializeField] private Transform _oldTransform;
     [SerializeField] private Transform _currentTransform;
 
@@ -22,7 +22,7 @@ public class MoveDron : MonoBehaviour
     private float _energyMax;
     private float _speedDron;
 
-    public event UnityAction ChangeEnergyDown;
+    public event UnityAction DecreasedEnergy;
 
     private void Start()
     {        
@@ -31,14 +31,14 @@ public class MoveDron : MonoBehaviour
 
     private void OnEnable()
     {
-        _dronControlButton.ChargingDron += DronStop;
-        _dronControlButton.UnChargingDron += DronMove;
+        _dronControlButton.ChargingStarted += Stop;
+        _dronControlButton.ChargingStopped += Move;
     }
 
     private void OnDisable()
     {
-        _dronControlButton.ChargingDron -= DronStop;
-        _dronControlButton.UnChargingDron -= DronMove;
+        _dronControlButton.ChargingStarted -= Stop;
+        _dronControlButton.ChargingStopped -= Move;
     }
 
     private void Update()
@@ -49,7 +49,7 @@ public class MoveDron : MonoBehaviour
         if (Mathf.Round(_angleAlfaEllipseStartingPositionOld) == 0 && _energyDown == false)
         {
             _energy = _energy - _changeEnergy;
-            ChangeEnergyDown?.Invoke();
+            DecreasedEnergy?.Invoke();
             _energyDown = true;
         }
         if (Mathf.Round(_angleAlfaEllipseStartingPositionOld) == 1)
@@ -58,14 +58,14 @@ public class MoveDron : MonoBehaviour
         }
     }
 
-    private void DronStop()
+    private void Stop()
     {
         _speedDron = _currentspeedDron;
         _currentspeedDron = 0;
-        _chargingDron.DronEnergyInit(_energy, _energyMax);
+        _chargingDron.EnergyInit(_energy, _energyMax);
     }
 
-    private void DronMove()
+    private void Move()
     {
         _currentspeedDron = _speedDron;
     }

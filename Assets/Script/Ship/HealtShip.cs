@@ -10,12 +10,12 @@ public class HealtShip : MonoBehaviour
 
     private void OnEnable()
     {
-        _ship.ChangeHealt += ChangeHealt;
+        _ship.HealthHasChanged += ChangeHealt;
     }
 
     private void OnDisable()
     {
-        _ship.ChangeHealt -= ChangeHealt;
+        _ship.HealthHasChanged -= ChangeHealt;
     }
 
     private void ChangeHealt()

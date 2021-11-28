@@ -2,33 +2,32 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ChargingDron : MonoBehaviour
+public class DronePowerSupply : MonoBehaviour
 {
     [SerializeField] private DronControlButton _dronControlButton;
     [SerializeField] private float _changeEnergyCharge;
-    [SerializeField] private MoveDron _moveDron;
-
-    private WaitForSeconds waitSecondsEnergy = new WaitForSeconds(0.1f);
+    [SerializeField] private DroneMovement _moveDron;
+    
     private float _energy;
     private float _energyMax;
 
-    public event UnityAction ChangeEnergyUp;
+    public event UnityAction IncreasedEnergy;
 
     private void OnEnable()
     {
-        _dronControlButton.ChargingDron += Charging;
-        _dronControlButton.UnChargingDron += StopCharging;
+        _dronControlButton.ChargingStarted += Charge;
+        _dronControlButton.ChargingStopped += StopCharging;
     }
 
     private void OnDisable()
     {
-        _dronControlButton.ChargingDron -= Charging;
-        _dronControlButton.UnChargingDron -= StopCharging;
+        _dronControlButton.ChargingStarted -= Charge;
+        _dronControlButton.ChargingStopped -= StopCharging;
     }
 
-    private void Charging()
+    private void Charge()
     {
-        StartCoroutine(Energy());
+        StartCoroutine(AddEnergy());
     }
 
     private void StopCharging()
@@ -37,21 +36,23 @@ public class ChargingDron : MonoBehaviour
         _moveDron.DronEnergyCharging(_energy);
     }
 
-    public void DronEnergyInit(float energy, float energyMax)
+    public void EnergyInit(float energy, float energyMax)
     {
         _energy = energy;
         _energyMax = energyMax;
     }
 
-    private IEnumerator Energy()
+    private IEnumerator AddEnergy()
     {
+       WaitForSeconds waitSecondsEnergy = new WaitForSeconds(0.1f);
+
         while (true)
         {
             yield return waitSecondsEnergy;
             if (_energy < _energyMax)
             {
                 _energy = _energy + _changeEnergyCharge;
-                ChangeEnergyUp?.Invoke();
+                IncreasedEnergy?.Invoke();
             }
         }
     }

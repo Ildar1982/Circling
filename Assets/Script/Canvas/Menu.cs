@@ -6,8 +6,8 @@ using IJunior.TypedScenes;
 public class Menu : MonoBehaviour
 {
     [SerializeField] private Ship _ship;
-    [SerializeField] private MoveDron _dron;
-    [SerializeField] private Button _energy_button;
+    [SerializeField] private DroneMovement _dron;
+    [SerializeField] private Button _energyButton;
 
     private CanvasGroup _canvasGroup;
     private bool _shipDied = false;
@@ -20,22 +20,22 @@ public class Menu : MonoBehaviour
 
     private void OnEnable()
     {
-        _ship.Died += DiedOrButtonExit;
+        _ship.Died += Enable;
         _ship.Died += RegisterShipDied;
     }
 
     private void OnDisable()
     {
-        _ship.Died -= DiedOrButtonExit;
+        _ship.Died -= Enable;
         _ship.Died -= RegisterShipDied;
     }
 
-    private void DiedOrButtonExit()
+    public void Enable()
     {
         _canvasGroup.alpha = 1;
         Time.timeScale = 0;
         _dron.gameObject.SetActive(false);
-        _energy_button.gameObject.SetActive(false);
+        _energyButton.gameObject.SetActive(false);
     }
 
     private void RegisterShipDied()
@@ -43,23 +43,23 @@ public class Menu : MonoBehaviour
         _shipDied = true;
     }
 
-    public void CloseButton()
+    public void Disable()
     {
         if (_shipDied == false)
         {
             _canvasGroup.alpha = 0;
             Time.timeScale = 1;
             _dron.gameObject.SetActive(true);
-            _energy_button.gameObject.SetActive(true);
+            _energyButton.gameObject.SetActive(true);
         }
     }
 
-    public void ExitButton()
+    public void ExitGame()
     {
         Application.Quit();
     }
 
-    public void RestartButton()
+    public void RestartGame()
     {
         Time.timeScale = 1;
         SampleScene.Load();

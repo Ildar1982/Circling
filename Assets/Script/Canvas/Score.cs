@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class AccrualAndWithdrawalPoints : MonoBehaviour
+public class Score : MonoBehaviour
 {
     [SerializeField] private Text _scoretext;
 
@@ -11,10 +11,10 @@ public class AccrualAndWithdrawalPoints : MonoBehaviour
     public void IncreseScore()
     {
         _score++;
-        WithdrawalPoints();
+        WithdrawalScore();
     }
 
-    private void WithdrawalPoints()
+    private void WithdrawalScore()
     {
         _scoretext.text = Convert.ToString(_score);
     }

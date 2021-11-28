@@ -8,16 +8,15 @@ public class Monstr : MonoBehaviour
     [SerializeField] private int _health;
     [SerializeField] private ParticleSystem _explosion;
 
-    private WaitForSeconds waitSecondsDamadge = new WaitForSeconds(0.2f);
     private Ship _target;
-    private AccrualAndWithdrawalPoints _score;   
+    private Score _score;
 
     private void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, _target.transform.position, _speed * Time.deltaTime);
     }
 
-    public void Init(Ship target, AccrualAndWithdrawalPoints score)
+    public void Init(Ship target, Score score)
     {
         _target = target;
         _score = score;
@@ -38,13 +37,15 @@ public class Monstr : MonoBehaviour
         if (_health <= 0)
         {
             _explosion.Play();
-            StartCoroutine(Destruction());           
+            StartCoroutine(DelayDestruction());
             _score.IncreseScore();
         }
     }
 
-    private IEnumerator Destruction()
+    private IEnumerator DelayDestruction()
     {
+        WaitForSeconds waitSecondsDamadge = new WaitForSeconds(0.2f);
+
         yield return waitSecondsDamadge;
         Destroy(gameObject);
     }
