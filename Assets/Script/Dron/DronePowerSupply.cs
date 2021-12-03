@@ -4,10 +4,10 @@ using UnityEngine.Events;
 
 public class DronePowerSupply : MonoBehaviour
 {
-    [SerializeField] private DronControlButton _dronControlButton;
+    [SerializeField] private DronControlButton _controlButton;
     [SerializeField] private float _changeEnergyCharge;
-    [SerializeField] private DroneMovement _moveDron;
-    
+    [SerializeField] private DroneMovement _movement;
+
     private float _energy;
     private float _energyMax;
 
@@ -15,14 +15,14 @@ public class DronePowerSupply : MonoBehaviour
 
     private void OnEnable()
     {
-        _dronControlButton.ChargingStarted += Charge;
-        _dronControlButton.ChargingStopped += StopCharging;
+        _controlButton.ChargingStarted += Charge;
+        _controlButton.ChargingStopped += StopCharging;
     }
 
     private void OnDisable()
     {
-        _dronControlButton.ChargingStarted -= Charge;
-        _dronControlButton.ChargingStopped -= StopCharging;
+        _controlButton.ChargingStarted -= Charge;
+        _controlButton.ChargingStopped -= StopCharging;
     }
 
     private void Charge()
@@ -32,11 +32,10 @@ public class DronePowerSupply : MonoBehaviour
 
     private void StopCharging()
     {
-        StopAllCoroutines();
-        _moveDron.DronEnergyCharging(_energy);
+        _movement.Charge(_energy);
     }
 
-    public void EnergyInit(float energy, float energyMax)
+    public void InitEnergy(float energy, float energyMax)
     {
         _energy = energy;
         _energyMax = energyMax;
@@ -44,7 +43,7 @@ public class DronePowerSupply : MonoBehaviour
 
     private IEnumerator AddEnergy()
     {
-       WaitForSeconds waitSecondsEnergy = new WaitForSeconds(0.1f);
+        WaitForSeconds waitSecondsEnergy = new WaitForSeconds(0.1f);
 
         while (true)
         {

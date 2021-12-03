@@ -37,12 +37,12 @@ public class Monstr : MonoBehaviour
         if (_health <= 0)
         {
             _explosion.Play();
-            StartCoroutine(DelayDestruction());
-            _score.IncreseScore();
+            StartCoroutine(Destroy());
+            _score.Increse();
         }
     }
 
-    private IEnumerator DelayDestruction()
+    private IEnumerator Destroy()
     {
         WaitForSeconds waitSecondsDamadge = new WaitForSeconds(0.2f);
 

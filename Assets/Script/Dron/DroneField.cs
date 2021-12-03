@@ -3,7 +3,7 @@
 public class DroneField : MonoBehaviour
 {
     [SerializeField] private int _damage;
-    [SerializeField] private DronControlButton _dronControlButton;
+    [SerializeField] private DronControlButton _controlButton;
     [SerializeField] private ParticleSystem _particle;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
@@ -11,14 +11,14 @@ public class DroneField : MonoBehaviour
 
     private void OnEnable()
     {
-        _dronControlButton.ChargingStarted += Unplug;
-        _dronControlButton.ChargingStopped += TurnOn;
+        _controlButton.ChargingStarted += Unplug;
+        _controlButton.ChargingStopped += TurnOn;
     }
 
     private void OnDisable()
     {
-        _dronControlButton.ChargingStarted -= Unplug;
-        _dronControlButton.ChargingStopped -= TurnOn;
+        _controlButton.ChargingStarted -= Unplug;
+        _controlButton.ChargingStopped -= TurnOn;
     }
 
     private void Unplug()

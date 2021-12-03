@@ -2,20 +2,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+[RequireComponent(typeof(Text))]
 public class Score : MonoBehaviour
 {
-    [SerializeField] private Text _scoretext;
+    private Text _text;
+    private int _quantity;
 
-    private int _score;
-
-    public void IncreseScore()
+    private void Awake()
     {
-        _score++;
-        WithdrawalScore();
+        _text = GetComponent<Text>();
     }
 
-    private void WithdrawalScore()
+    public void Increse()
     {
-        _scoretext.text = Convert.ToString(_score);
+        _quantity++;
+        Withdrawal();
+    }
+
+    private void Withdrawal()
+    {
+        _text.text = Convert.ToString(_quantity);
     }
 }

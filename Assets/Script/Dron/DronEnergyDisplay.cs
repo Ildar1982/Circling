@@ -4,21 +4,21 @@ using UnityEngine.UI;
 public class DronEnergyDisplay : MonoBehaviour
 {
     [SerializeField] private Image _image;
-    [SerializeField] private DronePowerSupply _chargingDrone;
-    [SerializeField] private DroneMovement _drone;
+    [SerializeField] private DronePowerSupply _charging;
+    [SerializeField] private DroneMovement _movement;
 
     private float _changedPart = 0.05f;
 
     private void OnEnable()
     {
-        _chargingDrone.IncreasedEnergy += ChangeEnergyUp;
-        _drone.DecreasedEnergy += ChangeEnergyDown;
+        _charging.IncreasedEnergy += ChangeEnergyUp;
+        _movement.DecreasedEnergy += ChangeEnergyDown;
     }
 
     private void OnDisable()
     {
-        _chargingDrone.IncreasedEnergy -= ChangeEnergyUp;
-        _drone.DecreasedEnergy -= ChangeEnergyDown;
+        _charging.IncreasedEnergy -= ChangeEnergyUp;
+        _movement.DecreasedEnergy -= ChangeEnergyDown;
     }
 
     private void ChangeEnergyUp()

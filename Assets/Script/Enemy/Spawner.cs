@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Monstr _monstr;
-    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private Monstr _template;
+    [SerializeField] private Transform[] _points;
     [SerializeField] private Ship _target;
     [SerializeField] private Score _score;
    
@@ -21,8 +21,8 @@ public class Spawner : MonoBehaviour
 
         while (true)
         {
-            numberPoints = Random.Range(0, _spawnPoints.Length);
-            Monstr monstr = Instantiate(_monstr, _spawnPoints[numberPoints]).GetComponent<Monstr>();
+            numberPoints = Random.Range(0, _points.Length);
+            Monstr monstr = Instantiate(_template, _points[numberPoints]).GetComponent<Monstr>();
             monstr.Init(_target, _score);
             yield return waitForTwoSeconds;
         }
