@@ -44,9 +44,7 @@ public class Monstr : MonoBehaviour
 
     private IEnumerator Destroy()
     {
-        WaitForSeconds waitSecondsDamadge = new WaitForSeconds(0.2f);
-
-        yield return waitSecondsDamadge;
+        yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }
 }

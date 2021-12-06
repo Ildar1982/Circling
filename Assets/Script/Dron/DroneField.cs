@@ -7,7 +7,7 @@ public class DroneField : MonoBehaviour
     [SerializeField] private ParticleSystem _particle;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    private bool _activity = true;
+    private bool _enabled = true;
 
     private void OnEnable()
     {
@@ -23,14 +23,14 @@ public class DroneField : MonoBehaviour
 
     private void Unplug()
     {
-        _activity = false;
+        _enabled = false;
         _particle.Stop();
         _spriteRenderer.enabled = false;
     }
 
     private void TurnOn()
     {
-        _activity = true;
+        _enabled = true;
         _particle.Play();
         _spriteRenderer.enabled = true;
     }
@@ -39,7 +39,7 @@ public class DroneField : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Monstr monstr))
         {
-            if (_activity == true)
+            if (_enabled == true)
             {
                 monstr.TakeDamage(_damage);
             }

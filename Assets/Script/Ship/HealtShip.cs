@@ -6,7 +6,7 @@ public class HealtShip : MonoBehaviour
     [SerializeField] private Ship _ship;
     [SerializeField] private Image _image;
 
-    private const float _degreeReductionLife = 0.16f;
+    private const float DegreeReductionLife = 0.16f;
 
     private void OnEnable()
     {
@@ -20,6 +20,6 @@ public class HealtShip : MonoBehaviour
 
     private void ChangeHealt()
     {
-        _image.fillAmount = _image.fillAmount - _degreeReductionLife;
+        _image.fillAmount = _image.fillAmount - DegreeReductionLife;
     }
 }

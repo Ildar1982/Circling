@@ -43,11 +43,9 @@ public class DronePowerSupply : MonoBehaviour
 
     private IEnumerator AddEnergy()
     {
-        WaitForSeconds waitSecondsEnergy = new WaitForSeconds(0.1f);
-
         while (true)
         {
-            yield return waitSecondsEnergy;
+            yield return new WaitForSeconds(0.1f);
             if (_energy < _energyMax)
             {
                 _energy = _energy + _changeEnergyCharge;

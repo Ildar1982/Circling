@@ -17,14 +17,14 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        WaitForSeconds waitForTwoSeconds = new WaitForSeconds(1.5f);
+        WaitForSeconds wait = new WaitForSeconds(1.5f);
 
         while (true)
         {
             numberPoints = Random.Range(0, _points.Length);
-            Monstr monstr = Instantiate(_template, _points[numberPoints]).GetComponent<Monstr>();
+            Monstr monstr = Instantiate(_template, _points[numberPoints]);
             monstr.Init(_target, _score);
-            yield return waitForTwoSeconds;
+            yield return wait;
         }
     }
 }

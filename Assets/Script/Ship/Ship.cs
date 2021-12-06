@@ -24,10 +24,8 @@ public class Ship : MonoBehaviour
     }
 
     private IEnumerator Explosion()
-    {
-        WaitForSeconds waitSecondsExplosion = new WaitForSeconds(2f);
-
-        yield return waitSecondsExplosion;
+    {         
+        yield return new WaitForSeconds(2f);
         Died?.Invoke();
     }
 }
